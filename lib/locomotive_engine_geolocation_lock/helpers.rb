@@ -1,4 +1,4 @@
-require 'locomotive/steam/middlewares/concerns/helpers'
+require 'locomotive/steam/middlewares/helpers'
 require_relative  'cacher'
 require 'json'
 
