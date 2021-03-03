@@ -19,7 +19,7 @@ module LocomotiveEngineGeolocationLock
             lock_countries = site.request_geolocation_lock_countries.gsub(/\s+/, "").downcase.split(',')
             if (lock_countries.include? user_country.downcase)
               redirect_to_page lock_page_handle , 302
-            else if request.env['PATH_INFO'].include? lock_page_handle
+            elsif request.env['PATH_INFO'].include? lock_page_handle
               redirect_to '/', 302
             end
           end
