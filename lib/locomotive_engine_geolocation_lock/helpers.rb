@@ -5,7 +5,7 @@ require 'json'
 module LocomotiveEngineGeolocationLock
 	module Helpers
 
-		include ::Locomotive::Steam::Middlewares::Concerns::Helpers
+		include ::Locomotive::Steam::Middlewares::Helpers
 
 		def get_user_agents_from_file
 			current_dir = File.dirname(__FILE__)
