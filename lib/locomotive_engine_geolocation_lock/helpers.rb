@@ -87,7 +87,9 @@ module LocomotiveEngineGeolocationLock
 			if currentCountry != nil
 				return currentCountry
 			else
-				uri = URI.parse("https://freegeoip.net/json/#{remote_ip}")
+				accessKeyParameter = ""
+				accessKeyParameter = "?access_key=#{ENV['GEOLOCATION_ACCESS_KEY']}" unless ENV['GEOLOCATION_ACCESS_KEY'].nil?
+				uri = URI.parse("https://api.ipstack.com/#{remote_ip}")
 
 				# Specify your own service
 				uri = URI.parse(ENV['GEOLOCATION_URL'].dup % remote_ip) unless ENV['GEOLOCATION_URL'].nil?
@@ -97,6 +99,7 @@ module LocomotiveEngineGeolocationLock
 
 				request = Net::HTTP::Get.new(uri.request_uri)
 				request["User-Agent"] = "arthrex-celltherapy-engine"
+				request["X-Api-Key"] = ENV['GEOLOCATION_X_API_KEY'] unless ENV['GEOLOCATION_X_API_KEY'].nil?
 
 				resp = http.request(request)
 				#Default / Fallback Country might be set up here
@@ -105,8 +108,12 @@ module LocomotiveEngineGeolocationLock
 					jsonResp = JSON.parse resp.body
 					if jsonResp["country_code"]
 						currentCountry = jsonResp["country_code"]
-					else jsonResp["country"]
-						currentCountry = jsonResp["country"]
+					else if jsonResp["country"]
+						if jsonResp["country"]["iso_code"]
+							currentCountry = jsonResp["country"]["iso_code"]
+						else
+							currentCountry = jsonResp["country"]
+						end
 					end
 				else
 					::Rails.logger.warn 'The country of the IP '<< remote_ip << ' could not be solved'
