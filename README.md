@@ -41,7 +41,6 @@ Specify your own page handle users from locked countries should get redirected t
 GEOLOCATION_LOCK_PAGE_HANDLE
 ```
 
-
 ## Test
 You can test the functionality by passing a parameter to the site like `my_website.io/?geo_ip=TESTIPADDRESS`  
 *Warning, this works only if the rails environment is set to development*
