@@ -19,11 +19,12 @@ gem 'locomotivecms'
 gem 'locomotive_engine_geolocation_lock', git: 'https://github.com/xremix/locomotive_engine_geolocation_lock', require: true
 ```
 
-
 ## Configuration
 
 To let user of the backoffice add countries you will need to add the following handle(s) to your engines code:
 `request_geolocation_lock_countries`
+
+You can disable this in a specific environment by setting the env var `GEOLOCATION_LOCK_DISABLE=true`
 
 ### Geolocation Service
 You can specify your own geolocation IP in the .env file
