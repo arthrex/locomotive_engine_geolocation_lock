@@ -106,15 +106,18 @@ module LocomotiveEngineGeolocationLock
 				currentCountry = ''
 				if valid_json? resp.body
 					jsonResp = JSON.parse resp.body
-					if jsonResp["country_code"]
-						currentCountry = jsonResp["country_code"]
-					elseif jsonResp["country"]
-						if jsonResp["country"]["iso_code"]
-							currentCountry = jsonResp["country"]["iso_code"]
-						else
-							currentCountry = jsonResp["country"]
-						end
-					end
+					puts jsonResp
+					currentCountry = jsonResp["country"]["iso_code"]
+					puts currentCountry
+					# if jsonResp["country_code"]
+					# 	currentCountry = jsonResp["country_code"]
+					# elseif jsonResp["country"]
+					# 	if jsonResp["country"]["iso_code"]
+					# 		currentCountry = jsonResp["country"]["iso_code"]
+					# 	else
+					# 		currentCountry = jsonResp["country"]
+					# 	end
+					# end
 				else
 					::Rails.logger.warn 'The country of the IP '<< remote_ip << ' could not be solved'
 				end
