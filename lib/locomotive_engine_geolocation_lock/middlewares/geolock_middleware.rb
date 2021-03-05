@@ -10,6 +10,7 @@ module LocomotiveEngineGeolocationLock
       include ::LocomotiveEngineGeolocationLock::Helpers
 
       def _call
+        puts "Checking Geolocation Lock"
         unless !ENV['GEOLOCATION_LOCK_DISABLE'].nil? && ENV['GEOLOCATION_LOCK_DISABLE'] == "true"
           lock_page_handle = 'locked-country'
           lock_page_handle = ENV['GEOLOCATION_LOCK_PAGE_HANDLE'] unless ENV['GEOLOCATION_LOCK_PAGE_HANDLE'].nil?
